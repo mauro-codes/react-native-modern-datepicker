@@ -95,6 +95,7 @@ class utils {
   };
 
   toEnglish = (value) => {
+    if(!value) return ''
     const charCodeZero = '۰'.charCodeAt(0);
     return value.replace(/[۰-۹]/g, (w) => w.charCodeAt(0) - charCodeZero);
   };

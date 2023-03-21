@@ -78,6 +78,8 @@ const SelectMonth = () => {
   const onChangeYear = text => {
     if (Number(utils.toEnglish(text))) {
       setYear(utils.toPersianNumber(text));
+    } else {
+      setYear()
     }
   };
 
