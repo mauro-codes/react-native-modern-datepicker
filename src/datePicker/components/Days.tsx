@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {useCalendar} from '../DatePicker';
@@ -8,7 +8,7 @@ const Days = () => {
   const [mainState, setMainState] = state;
   const [itemSize, setItemSize] = useState(0);
   const style = styles(options);
-  const days = useMemo(() => utils.getMonthDays(mainState.activeDate));
+  const days = React.useMemo(() => utils.getMonthDays(mainState.activeDate), []);
 
   const onSelectDay = date => {
     setMainState({
@@ -21,7 +21,7 @@ const Days = () => {
   const changeItemHeight = ({nativeEvent}) => {
     const {width} = nativeEvent.layout;
     if (width > 0) {
-      setItemSize((width / 7).toFixed(2) * 1 - 0.5);
+      setItemSize(Number((width / 7).toFixed(2)) - 0.5);
     }
   };
 

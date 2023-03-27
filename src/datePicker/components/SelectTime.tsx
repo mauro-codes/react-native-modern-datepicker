@@ -19,16 +19,17 @@ const TimeScroller = ({title, data, onChange}) => {
   const [itemSize, setItemSize] = useState(0);
   const style = styles(options);
   const scrollAnimatedValue = useRef(new Animated.Value(0)).current;
-  const scrollListener = useRef(null);
+  const scrollListener = useRef<ReturnType<typeof setInterval> | string | null>(null);
   const active = useRef(0);
   data = ['', '', ...data, '', ''];
 
   useEffect(() => {
-    scrollListener.current && clearInterval(scrollListener.current);
+    scrollListener.current &&
+      clearInterval(scrollListener.current as ReturnType<typeof setInterval>);
     scrollListener.current = scrollAnimatedValue.addListener(({value}) => (active.current = value));
 
     return () => {
-      clearInterval(scrollListener.current);
+      clearInterval(scrollListener.current as ReturnType<typeof setInterval>);
     };
   }, [scrollAnimatedValue]);
 
@@ -186,12 +187,12 @@ const SelectTime = () => {
     <Animated.View style={containerStyle}>
       <TimeScroller
         title={utils.config.hour}
-        data={Array.from({length: 24}, (x, i) => i)}
+        data={Array.from({length: 24}, (_, i) => i)}
         onChange={hour => setTime({...time, hour})}
       />
       <TimeScroller
         title={utils.config.minute}
-        data={Array.from({length: 60 / minuteInterval}, (x, i) => i * minuteInterval)}
+        data={Array.from({length: 60 / minuteInterval}, (_, i) => i * minuteInterval)}
         onChange={minute => setTime({...time, minute})}
       />
       <View style={style.footer}>

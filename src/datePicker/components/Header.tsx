@@ -4,7 +4,7 @@ import {View, TouchableOpacity, Text, Image, StyleSheet, Animated, I18nManager} 
 
 import {useCalendar} from '../DatePicker';
 
-const Header = ({changeMonth}) => {
+const Header = ({changeMonth}: {changeMonth: (type: 'NEXT' | 'PREV') => void}) => {
   const {
     options,
     disableDateChange,
@@ -30,7 +30,7 @@ const Header = ({changeMonth}) => {
     disableDateChange ||
     (maximumDate && utils.checkArrowMonthDisabled(mainState.activeDate, false));
 
-  const onChangeMonth = (type) => {
+  const onChangeMonth = type => {
     if (disableChange) return;
     setDisableChange(true);
     changeMonthAnimation(type);
@@ -127,7 +127,7 @@ const Header = ({changeMonth}) => {
   );
 };
 
-const styles = (theme) =>
+const styles = theme =>
   StyleSheet.create({
     container: {
       alignItems: 'center',

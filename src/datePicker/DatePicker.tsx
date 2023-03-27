@@ -1,4 +1,4 @@
-import React, {createContext, useReducer, useContext, useState} from 'react';
+import React, {useReducer, useContext, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -21,7 +21,7 @@ const options = {
   daysAnimationDistance: 200,
 };
 
-const reducer = (state, action) => {
+const reducer = (state: any, action: any) => {
   switch (action.type) {
     case 'set':
       return {...state, ...action};
@@ -34,14 +34,14 @@ const reducer = (state, action) => {
   }
 };
 
-const CalendarContext = createContext();
+const CalendarContext = React.createContext<any>(undefined);
 
 const useCalendar = () => {
   const contextValue = useContext(CalendarContext);
   return contextValue;
 };
 
-const DatePicker = props => {
+const DatePicker = (props: any) => {
   const calendarUtils = new utils(props);
   const contextValue = {
     ...props,
@@ -96,7 +96,7 @@ const DatePicker = props => {
   );
 };
 
-const styles = theme =>
+const styles = (theme: any) =>
   StyleSheet.create({
     container: {
       backgroundColor: theme.backgroundColor,

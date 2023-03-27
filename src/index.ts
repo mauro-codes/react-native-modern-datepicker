@@ -1,9 +1,9 @@
-// Type definitions for react-native-modern-datepicker 1.0
-// Project: https://github.com/HosseinShabani/react-native-modern-datepicker#readme
-// Definitions by: Ankan002 <https://github.com/Ankan002>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 import {CSSProperties} from 'react';
+import {DatePicker} from './datePicker/DatePicker';
+import {utils} from './utils';
+
+export const {getFormatedDate, getToday} = new utils({isGregorian: true});
+export default DatePicker;
 
 export interface ModernDatepickerProps {
   onSelectedChange?: (dateString: string) => void;
@@ -38,7 +38,3 @@ export interface ModernDatepickerProps {
     daysAnimationDistance?: number;
   };
 }
-
-export default function(props: ModernDatepickerProps): JSX.Element;
-export function getToday(): string;
-export function getFormatedDate(date?: Date, format?: string): string;
